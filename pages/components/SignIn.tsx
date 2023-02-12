@@ -1,7 +1,7 @@
 import { Button, Box } from '@chakra-ui/react';
 import { signInWithPopup } from 'firebase/auth';
 import React from 'react';
-import { auth, provider } from "../firebase";
+import { auth, provider } from "../../firebase";
 import UserInfo from './UserInfo';
 
 const SignInButton = () => {

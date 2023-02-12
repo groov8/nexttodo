@@ -1,6 +1,6 @@
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 import { collection, doc, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { todo } from "../atom";

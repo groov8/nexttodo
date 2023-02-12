@@ -3,7 +3,7 @@ import { todo } from '../atom';
 import { Box, Button, Text } from '@chakra-ui/react';
 import type { Todo } from '../types/Todo';
 import { collection, deleteDoc, doc } from 'firebase/firestore';
-import { auth, db } from '../firebase';
+import { auth, db } from '../../firebase';
 
 type Props = {
     item: Todo

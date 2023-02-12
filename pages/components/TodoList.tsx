@@ -3,7 +3,7 @@ import { stateFilteredTodo } from '../selector';
 import TodoItem from './TodoItem';
 import type { Todo } from '../types/Todo';
 import { useEffect } from 'react';
-import { auth, db } from '../firebase';
+import { auth, db } from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { todo } from '../atom';
 
