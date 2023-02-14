@@ -35,9 +35,14 @@ const ItemCreator = () => {
     setTitle('');
   };
 
+  const addTerm = () => {
+    
+  }
+
   return (
     <div>
-      <Input h={8} w={52} border={"2px"} placeholder={"Todo"} type="text" value={title} onChange={handleChange} />
+      <Input h={8} w={52} border={"2px"} placeholder={"Title"} type="text" value={title} onChange={handleChange} />
+      <Button colorScheme={'green'} onClick={addTerm}>期間を指定</Button>
       <Button colorScheme="blue" onClick={addItem}>追加</Button>
     </div>
   );
