@@ -27,6 +27,7 @@ function Calendar(Props:Props) {
             },
           ]}
         />
+        <Button onClick={Props.onClose}>閉じる</Button>
       </Modal>
     </>
   );
