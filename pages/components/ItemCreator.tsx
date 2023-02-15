@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { todo } from '../atom';
-import { Input, Button } from '@chakra-ui/react';
+import { Input, Button, useDisclosure } from '@chakra-ui/react';
 import { auth, db } from '../firebase';
 import { collection, doc, setDoc } from 'firebase/firestore';
+import Calendar from './Calendar';
 
 const ItemCreator = () => {
   const [title, setTitle] = useState('');
@@ -27,22 +28,20 @@ const ItemCreator = () => {
       },
     ]);
     setDoc(doc(colRef, id), {
-        id: id,
-        title: title,
-        state: 'not_started',
-        term: ''
+      id: id,
+      title: title,
+      state: 'not_started',
+      term: ''
     })
     setTitle('');
   };
 
-  const addTerm = () => {
-    
-  }
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <div>
       <Input h={8} w={52} border={"2px"} placeholder={"Title"} type="text" value={title} onChange={handleChange} />
-      <Button colorScheme={'green'} onClick={addTerm}>期間を指定</Button>
+      <Calendar isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
       <Button colorScheme="blue" onClick={addItem}>追加</Button>
     </div>
   );
