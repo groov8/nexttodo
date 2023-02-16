@@ -9,6 +9,7 @@ import { Img, Box } from "@chakra-ui/react";
 import ItemCreator from "./ItemCreator";
 import TodoList from "./TodoList";
 import DisplaySelector from "./DisplaySelector";
+import Calendar from "./Calendar";
 
 function UserInfo() {
     const [data, setData] = useRecoilState(todo);
