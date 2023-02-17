@@ -4,10 +4,11 @@ import { todo } from '../atom';
 import { Input, Button, useDisclosure } from '@chakra-ui/react';
 import { auth, db } from '../../firebase';
 import { collection, doc, setDoc } from 'firebase/firestore';
-import Calendar from './Calendar';
+import TermSetter from "./TermSetter"
 
 const ItemCreator = () => {
   const [title, setTitle] = useState('');
+  const [term, setTerm] = useState("");
   const [todoList, setTodoList] = useRecoilState(todo);
   const uid: any = auth.currentUser?.uid;
   const colRef = collection(db, uid);
@@ -24,25 +25,28 @@ const ItemCreator = () => {
         id: id,
         title: title,
         state: 'not_started',
-        term: ''
+        term: term
       },
     ]);
     setDoc(doc(colRef, id), {
       id: id,
       title: title,
       state: 'not_started',
-      term: ''
+      term: term
     })
     setTitle('');
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const getTerm = (date:string) => {
+    setTerm(date);
+  }
 
   return (
     <div>
       <Input h={8} w={52} border={"2px"} placeholder={"Title"} type="text" value={title} onChange={handleChange} />
-      <Calendar isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
-      <Button colorScheme="blue" onClick={addItem}>追加</Button>
+      <TermSetter isOpen={isOpen} onOpen={onOpen} onClose={onClose} term={getTerm} />
+      <Button colorScheme="blue" onClick={()=>{addItem; console.log(term)}}>追加</Button>
     </div>
   );
 }
