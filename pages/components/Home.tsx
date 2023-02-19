@@ -1,10 +1,7 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { SignInButton } from "./SignIn";
-import { auth, db } from "../../firebase";
-import SignOutButton from "./SignOut";
+import { auth } from "../../firebase";
 import UserInfo from "./UserInfo";
-import ItemCreator from "./ItemCreator";
-
 function Home() {
     const [user] = useAuthState(auth);
 
@@ -12,8 +9,7 @@ function Home() {
         <>
             {user ? (
                 <>
-                    <UserInfo/>
-                    <SignOutButton />
+                    <UserInfo />
                 </>
             ) :
                 (<SignInButton />)

@@ -1,9 +1,11 @@
 import { useRecoilState } from 'recoil';
 import { todo } from '../atom';
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
 import type { Todo } from '../types/Todo';
 import { collection, deleteDoc, doc } from 'firebase/firestore';
 import { auth, db } from '../../firebase';
+import TermSetter from './TermSetter';
+import { useState } from 'react';
 
 type Props = {
     item: Todo
@@ -11,6 +13,8 @@ type Props = {
 
 const TodoItem = ({ item }: Props) => {
     const [todoList, setTodoList] = useRecoilState(todo);
+    const [editTitle, setEditTitle] = useState(item.title)
+    const [term, setTerm] = useState("");
     const index = todoList.findIndex((target) => target.id === item.id);
     const uid: string | undefined = auth.currentUser?.uid;
     if (uid) {
@@ -38,17 +42,22 @@ const TodoItem = ({ item }: Props) => {
             setTodoList(newTodoList);
             deleteDoc(docRef);
         };
-    
-    return (
-        <Box>
-            <Text as={"span"} mx={[0, 1]}>{item.title}</Text>
-            <select value={item.state} onChange={handleChange}>
-                <option value='not_started'>未着手</option>
-                <option value='start'>着手</option>
-                <option value='complete'>完了</option>
-            </select>
-            <Button m={[1, 0, 1, 1]} colorScheme="blue" onClick={deleteItem}>削除</Button>
-        </Box>)
+
+        const { isOpen, onOpen, onClose } = useDisclosure();
+        return (
+            <HStack>
+                <Text as={"span"} mx={[0, 1]}>{item.title}</Text>
+                <select value={item.state} onChange={handleChange}>
+                    <option value='not_started'>未着手</option>
+                    <option value='start'>着手</option>
+                    <option value='complete'>完了</option>
+                </select>
+                <Text>{item.term}</Text>
+                <Button onClick={onOpen}>編集</Button>
+                <TermSetter isOpen={isOpen} onClose={onClose} title={editTitle} setTitle={setEditTitle} setTerm={setTerm} />
+                <Button m={[1, 0, 1, 1]} colorScheme="blue" onClick={deleteItem}>削除</Button>
+            </HStack>
+        )
     }
     return <></>
 }

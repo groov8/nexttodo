@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { todo } from '../atom';
-import { Input, Button, useDisclosure } from '@chakra-ui/react';
+import { Input, Button, Box, useDisclosure } from '@chakra-ui/react';
 import { auth, db } from '../../firebase';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import TermSetter from "./TermSetter"
@@ -37,17 +37,20 @@ const ItemCreator = () => {
     setTitle('');
   };
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const getTerm = (date:string) => {
+  const getTerm = (date: string) => {
     setTerm(date);
   }
 
+  const {isOpen, onOpen, onClose} = useDisclosure();
+  const [a,b] = useState("");
+
   return (
-    <div>
+    <Box m={[0,"2%","1%"]}>
       <Input h={8} w={52} border={"2px"} placeholder={"Title"} type="text" value={title} onChange={handleChange} />
-      <TermSetter isOpen={isOpen} onOpen={onOpen} onClose={onClose} term={getTerm} />
-      <Button colorScheme="blue" onClick={()=>{addItem; console.log(term)}}>追加</Button>
-    </div>
+      <Button onClick={onOpen}>期間を指定</Button>
+      <TermSetter isOpen={isOpen} onClose={onClose} title={a} setTitle={b} setTerm={setTerm} />
+      <Button colorScheme="blue" onClick={addItem}>追加</Button>
+    </Box>
   );
 }
 
