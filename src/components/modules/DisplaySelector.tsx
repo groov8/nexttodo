@@ -11,7 +11,7 @@ const DisplaySelector = () => {
   };
   return (
     <>
-      <Select value={Filter.state} onChange={handleChange} w={"7vw"}>
+      <Select mx={[0,"2%"]} value={Filter.state} onChange={handleChange} w={"7vw"}>
         <option value='all'>すべて</option>
         <option value='not_started'>未着手</option>
         <option value='start'>着手</option>
