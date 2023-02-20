@@ -1,21 +1,20 @@
-import { initializeApp, getApps, getApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 
-
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
+  apiKey: "AIzaSyANNMnxBEewVyoeqbGpmn-qFMpFSAei0bk",
+  authDomain: "next-todo-859a0.firebaseapp.com",
+  projectId: "next-todo-859a0",
+  storageBucket: "next-todo-859a0.appspot.com",
+  messagingSenderId: "921346429588",
+  appId: "1:921346429588:web:145bdd14e874d27eea1a81"
 };
 
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
+const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-export { db, auth, provider } 
+export {db, auth, provider};
