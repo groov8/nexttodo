@@ -12,13 +12,18 @@ const ItemCreator = () => {
   const [todoList, setTodoList] = useRecoilState(todo);
   const uid: any = auth.currentUser?.uid;
   const colRef = collection(db, uid);
+  const docRef = doc(colRef);
 
   const handleChange = (e: any) => {
     setTitle(e.target.value);
   };
 
   const addItem = () => {
-    const id = Math.random().toString();
+    setDoc(doc(colRef), {
+      title: title,
+      state: 'not_started',
+      term: term
+    })
     setTodoList([
       ...todoList,
       {
@@ -28,12 +33,6 @@ const ItemCreator = () => {
         term: term
       },
     ]);
-    setDoc(doc(colRef, id), {
-      id: id,
-      title: title,
-      state: 'not_started',
-      term: term
-    })
     setTitle('');
   };
 

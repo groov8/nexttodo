@@ -1,4 +1,4 @@
-import { Filter, Todo } from "./types/Todo";
+import { Filter, Todo } from "../../../types/Todo";
 import { atom } from "recoil";
 
 export const todo = atom<Todo[]>({
