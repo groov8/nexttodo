@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import { auth } from "../../firebase";
+import { auth } from "../../../firebase";
 
 
 function SignOutButton() {

@@ -1,11 +1,11 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { stateFilteredTodo } from '../selector';
+import { stateFilteredTodo } from '../store/selector';
 import TodoItem from './TodoItem';
-import type { Todo } from '../types/Todo';
+import type { Todo } from '../../../types/Todo';
 import { useEffect } from 'react';
-import { auth, db } from '../../firebase';
+import { auth, db } from '../../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
-import { todo } from '../atom';
+import { todo } from '../store/atom';
 
 const TodoList = () => {
   const setTodo = useSetRecoilState(todo)

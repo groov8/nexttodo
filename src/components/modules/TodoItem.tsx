@@ -1,9 +1,9 @@
 import { useRecoilState } from 'recoil';
-import { todo } from '../atom';
+import { todo } from '../store/atom';
 import { Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
-import type { Todo } from '../types/Todo';
+import type { Todo } from '../../../types/Todo';
 import { collection, deleteDoc, doc } from 'firebase/firestore';
-import { auth, db } from '../../firebase';
+import { auth, db } from '../../../firebase';
 import TermSetter from './TermSetter';
 import { useState } from 'react';
 

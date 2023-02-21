@@ -1,10 +1,10 @@
-import { auth } from "../../firebase";
+import { auth } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../../../firebase";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { todo } from "../atom";
-import { Todo } from "../types/Todo";
+import { todo } from "../store/atom";
+import { Todo } from "../../../types/Todo";
 import { Img, Box, HStack } from "@chakra-ui/react";
 import ItemCreator from "./ItemCreator";
 import TodoList from "./TodoList";
