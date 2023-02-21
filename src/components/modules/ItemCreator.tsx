@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { todo } from '../store/atom';
 import { Input, Button, Box, useDisclosure } from '@chakra-ui/react';
 import { auth, db } from '../../../firebase';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc } from 'firebase/firestore';
 import TermSetter from "./TermSetter"
 
 const ItemCreator = () => {
@@ -18,8 +18,8 @@ const ItemCreator = () => {
     setTitle(e.target.value);
   };
 
-  const addItem = () => {
-    setDoc(doc(colRef), {
+  const addItem = async () => {
+    const todo = await addDoc((colRef), {
       title: title,
       state: 'not_started',
       term: term
@@ -27,7 +27,7 @@ const ItemCreator = () => {
     setTodoList([
       ...todoList,
       {
-        id: id,
+        id: todo.id,
         title: title,
         state: 'not_started',
         term: term

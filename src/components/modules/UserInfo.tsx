@@ -20,7 +20,7 @@ function UserInfo() {
             if (colRef) {
                 getDocs(colRef).then((snapShot) => {
                     let tmp: Todo[] = [];
-                    snapShot.forEach((item) => { tmp.push(item.data() as Todo) })
+                    snapShot.forEach((item) => { tmp.push(/* ここに item.data と item.id を Todo型として入れたい*/)})
                     setData(tmp);
                 })
             }
