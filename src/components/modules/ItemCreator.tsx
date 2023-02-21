@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { todo } from '../atom';
+import { todo } from '../store/atom';
 import { Input, Button, Box, useDisclosure } from '@chakra-ui/react';
-import { auth, db } from '../../firebase';
+import { auth, db } from '../../../firebase';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import TermSetter from "./TermSetter"
 
