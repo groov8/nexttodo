@@ -25,6 +25,7 @@ function TermSetter(props: Props) {
               <>
                 <FormLabel > 変更後のタイトル</FormLabel>
                 <Input value={props.title} onChange={(e) => props.setTitle?.(e.target.value)} />
+                <></>
               </> :<></>
             }
             <FullCalendar
