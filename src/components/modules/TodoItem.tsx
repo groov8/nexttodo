@@ -54,7 +54,7 @@ const TodoItem = ({ item }: Props) => {
                 </select>
                 <Text>{item.term}</Text>
                 <Button onClick={onOpen}>編集</Button>
-                <TermSetter isOpen={isOpen} onClose={onClose} title={editTitle} setTitle={setEditTitle} setTerm={setTerm} />
+                <TermSetter isOpen={isOpen} onClose={onClose} title={editTitle} setTitle={setEditTitle} setTerm={setTerm} isEdit={false}/>
                 <Button m={[1, 0, 1, 1]} colorScheme="blue" onClick={deleteItem}>削除</Button>
             </HStack>
         )

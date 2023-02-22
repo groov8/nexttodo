@@ -6,33 +6,38 @@ import daygrid from "@fullcalendar/daygrid";
 type Props = {
   isOpen: boolean
   onClose: () => void
-  title: string
-  setTitle: (title: string) => void
+  title?: string
+  setTitle?: (title: string) => void
   setTerm: (term: string) => void
+  isEdit: boolean
 }
 
-function TermSetter(Props: Props) {
+function TermSetter(props: Props) {
 
   return (
     <>
-      <Modal isOpen={Props.isOpen} onClose={Boolean} size={"xl"}>
+      <Modal isOpen={props.isOpen} onClose={Boolean} size={"xl"}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>編集</ModalHeader>
+          {props.isEdit ? <ModalHeader>編集</ModalHeader> : <ModalHeader>作成</ModalHeader>}
           <ModalBody>
-            <FormLabel>変更後のタイトル</FormLabel>
-            <Input value={Props.title} onChange={(e) => Props.setTitle(e.target.value)}/>
+            {props.isEdit ?
+              <>
+                <FormLabel > 変更後のタイトル</FormLabel>
+                <Input value={props.title} onChange={(e) => props.setTitle?.(e.target.value)} />
+              </> :<></>
+            }
             <FullCalendar
               plugins={[interaction, daygrid]}
               initialView="dayGridMonth"
               selectable={true}
               locale="ja"
               dateClick={function (info) {
-                Props.setTerm(info.dateStr);
+                props.setTerm(info.dateStr);
               }}
             />
           </ModalBody>
-          <Button onClick={Props.onClose}>閉じる</Button>
+          <Button onClick={props.onClose}>閉じる</Button>
         </ModalContent>
       </Modal>
     </>

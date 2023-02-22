@@ -41,13 +41,12 @@ const ItemCreator = () => {
   }
 
   const {isOpen, onOpen, onClose} = useDisclosure();
-  const [a,b] = useState("");
 
   return (
     <Box m={[0,"2%","1%"]}>
       <Input h={8} w={52} border={"2px"} placeholder={"Title"} type="text" value={title} onChange={handleChange} />
       <Button onClick={onOpen}>期間を指定</Button>
-      <TermSetter isOpen={isOpen} onClose={onClose} title={a} setTitle={b} setTerm={setTerm} />
+      <TermSetter isOpen={isOpen} onClose={onClose} setTerm={setTerm} isEdit={true}/>
       <Button colorScheme="blue" onClick={addItem}>追加</Button>
     </Box>
   );
