@@ -20,7 +20,7 @@ function UserInfo() {
             if (colRef) {
                 getDocs(colRef).then((snapShot) => {
                     let tmp: Todo[] = [];
-                    snapShot.forEach((item) => { tmp.push() })
+                    snapShot.forEach((item) => { tmp.push({...item.data() as Todo, ...{id:item.id}})})
                     setData(tmp);
                 })
             }
