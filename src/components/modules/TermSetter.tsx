@@ -2,17 +2,18 @@ import FullCalendar from "@fullcalendar/react";
 import { Button, FormControl, FormLabel, HStack, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay } from "@chakra-ui/react";
 import interaction from "@fullcalendar/interaction";
 import daygrid from "@fullcalendar/daygrid";
+import { useState } from "react";
 
 type Props = {
   isOpen: boolean
   onClose: () => void
-  title?: string
   setTitle?: (title: string) => void
   setTerm: (term: string) => void
   isEdit: boolean
 }
 
 function TermSetter(props: Props) {
+  const [title, setTitle] = useState("");
 
   return (
     <>
@@ -24,9 +25,9 @@ function TermSetter(props: Props) {
             {props.isEdit ?
               <>
                 <FormLabel > 変更後のタイトル</FormLabel>
-                <Input value={props.title} onChange={(e) => props.setTitle?.(e.target.value)} />
-                <></>
-              </> :<></>
+                <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+                <Button onClick={() => { props.setTitle?.(title) }}>変更</Button>
+              </> : <></>
             }
             <FullCalendar
               plugins={[interaction, daygrid]}
