@@ -10,7 +10,7 @@ import ItemCreator from "./ItemCreator";
 import TodoList from "./TodoList";
 import DisplaySelector from "./DisplaySelector";
 import SignOutButton from "./SignOut";
-import DeleteItems from "@/src/DeleteItems";
+import DeleteItems from "@/src/components/modules/DeleteItems";
 
 function UserInfo() {
     const [data, setData] = useRecoilState(todo);
