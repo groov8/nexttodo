@@ -3,7 +3,7 @@ import { Todo } from "@/types/Todo";
 import { Button } from "@chakra-ui/react";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 import { useRecoilState, useRecoilValue } from "recoil"
-import { filter, todo } from "./components/store/atom";
+import { filter, todo } from "../store/atom";
 
 function DeleteItems() {
     const [todoList, setTodoList] = useRecoilState(todo);
