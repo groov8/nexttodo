@@ -7,26 +7,27 @@ import { useState } from "react";
 type Props = {
   isOpen: boolean
   onClose: () => void
-  setTitle?: (title: string) => void
+  title?: string
+  setTitle?: (title: string | undefined) => void
+  term: string
   setTerm: (term: string) => void
   isEdit: boolean
 }
 
 function TermSetter(props: Props) {
-  const [title, setTitle] = useState("");
-
+  const [title, setTitle] = useState(props.title);
+  const [term, setTerm] = useState(props.term);
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={Boolean} size={"xl"}>
-        <ModalOverlay />
+        <ModalOverlay/>
         <ModalContent>
           {props.isEdit ? <ModalHeader>編集</ModalHeader> : <ModalHeader>作成</ModalHeader>}
           <ModalBody>
             {props.isEdit ?
               <>
                 <FormLabel > 変更後のタイトル</FormLabel>
-                <Input value={title} onChange={(e) => setTitle(e.target.value)} />
-                <Button onClick={() => { props.setTitle?.(title) }}>変更</Button>
+                <Input value={title} onChange={(e) => { setTitle(e.target.value) }} />
               </> : <></>
             }
             <FullCalendar
@@ -35,15 +36,15 @@ function TermSetter(props: Props) {
               selectable={true}
               locale="ja"
               dateClick={function (info) {
-                props.setTerm(info.dateStr);
+                setTerm(info.dateStr);
               }}
             />
           </ModalBody>
-          <Button onClick={props.onClose}>閉じる</Button>
+          {props.isEdit ? <Button onClick={() => { props.setTitle?.(title), props.setTerm(term), props.onClose() }}>変更</Button> :
+            <Button onClick={() => { props.onClose(), props.setTerm(term), setTerm("") }}>閉じる</Button>}
         </ModalContent>
       </Modal>
-    </>
-  );
+    </>)
 };
 
 export default TermSetter;

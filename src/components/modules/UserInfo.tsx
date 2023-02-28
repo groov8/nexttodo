@@ -1,7 +1,7 @@
 import { auth } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useRecoilState } from "recoil";
 import { todo } from "../store/atom";
 import { Todo } from "../../../types/Todo";
@@ -10,6 +10,7 @@ import ItemCreator from "./ItemCreator";
 import TodoList from "./TodoList";
 import DisplaySelector from "./DisplaySelector";
 import SignOutButton from "./SignOut";
+import DeleteItems from "@/src/DeleteItems";
 
 function UserInfo() {
     const [data, setData] = useRecoilState(todo);
@@ -20,7 +21,7 @@ function UserInfo() {
             if (colRef) {
                 getDocs(colRef).then((snapShot) => {
                     let tmp: Todo[] = [];
-                    snapShot.forEach((item) => { tmp.push({...item.data() as Todo, ...{id:item.id}})})
+                    snapShot.forEach((item) => { tmp.push({ ...item.data() as Todo, ...{ id: item.id } }) })
                     setData(tmp);
                 })
             }
@@ -35,7 +36,10 @@ function UserInfo() {
                     <Img w={"100px"} h={"100px"} my={1} mr={1} ml={2} clipPath={"circle(50px at 50px 50px)"} src={auth.currentUser?.photoURL}></Img>
                     <SignOutButton />
                 </HStack>
+                <HStack>
                 <DisplaySelector />
+                <DeleteItems/>
+                </HStack>
                 <ItemCreator />
                 <TodoList />
             </Box>

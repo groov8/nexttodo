@@ -5,7 +5,7 @@ export type Todo = {
     term: string
   }
 
-  export type Filter = {
+export type Filter = {
     state: string
     term: string
   }

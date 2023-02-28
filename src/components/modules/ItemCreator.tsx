@@ -4,10 +4,10 @@ import { todo } from '../store/atom';
 import { Input, Button, Box, useDisclosure } from '@chakra-ui/react';
 import { auth, db } from '../../../firebase';
 import { addDoc, collection, doc } from 'firebase/firestore';
-import TermSetter from "./TermSetter"
+import TermSetter from "./TermSetter";
 
 const ItemCreator = () => {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const [term, setTerm] = useState("");
   const [todoList, setTodoList] = useRecoilState(todo);
   const uid: any = auth.currentUser?.uid;
@@ -34,19 +34,20 @@ const ItemCreator = () => {
       },
     ]);
     setTitle('');
+    setTerm("")
   };
 
   const getTerm = (date: string) => {
     setTerm(date);
   }
 
-  const {isOpen, onOpen, onClose} = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box m={[0,"2%","1%"]}>
+    <Box m={[0, "2%", "1%"]}>
       <Input h={8} w={52} border={"2px"} placeholder={"Title"} type="text" value={title} onChange={handleChange} />
       <Button onClick={onOpen}>期間を指定</Button>
-      <TermSetter isOpen={isOpen} onClose={onClose} setTerm={setTerm} isEdit={false}/>
+      <TermSetter isOpen={isOpen} onClose={onClose} setTerm={setTerm} isEdit={false} term={term} />
       <Button colorScheme="blue" onClick={addItem}>追加</Button>
     </Box>
   );

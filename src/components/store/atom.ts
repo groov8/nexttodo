@@ -10,6 +10,6 @@ export const filter = atom<Filter>({
     key: "filter",
     default: {
         state: "all",
-        term: ""
+        term: "",
     }
 })

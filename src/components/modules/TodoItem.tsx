@@ -10,9 +10,10 @@ type Props = {
     item: Todo
 }
 
-const TodoItem = (item: Todo) => {
+const TodoItem = ({ item }: Props) => {
     const [todoList, setTodoList] = useRecoilState(todo);
-    const [term, setTerm] = useState("");
+    const [title, setTitle] = useState<string | undefined>(item.title);
+    const [term, setTerm] = useState(item.term);
     const index = todoList.findIndex((target) => target.id === item.id);
 
     const handleChange = (e: any) => {
@@ -31,16 +32,16 @@ const TodoItem = (item: Todo) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <HStack>
-            <Text as={"span"} mx={[0, 1]}>{item.title}</Text>
+            <Text as={"span"} mx={[0, 1]}>{title}</Text>
             <select value={item.state} onChange={handleChange}>
                 <option value='not_started'>未着手</option>
                 <option value='start'>着手</option>
                 <option value='complete'>完了</option>
             </select>
-            <Text>{item.term}</Text>
+            <Text>{term}</Text>
             <Button onClick={onOpen}>編集</Button>
-            <TermSetter isOpen={isOpen} onClose={onClose} setTerm={setTerm} isEdit={true} />
-            <DeleteItem id={item.id} index={index} todoList={todoList} setTodoList={setTodoList}/>
+            <TermSetter isOpen={isOpen} onClose={onClose} title={title} setTitle={setTitle} term={term} setTerm={setTerm} isEdit={true} />
+            <DeleteItem id={item.id} index={index} todoList={todoList} setTodoList={setTodoList} />
         </HStack>
     )
 
