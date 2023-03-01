@@ -1,7 +1,7 @@
 import { auth } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { todo } from "../store/atom";
 import { Todo } from "../../../types/Todo";
@@ -11,6 +11,7 @@ import TodoList from "./TodoList";
 import DisplaySelector from "./DisplaySelector";
 import SignOutButton from "./SignOut";
 import DeleteItems from "@/src/components/modules/DeleteItems";
+import Sort from "./Sort";
 
 function UserInfo() {
     const [data, setData] = useRecoilState(todo);
@@ -37,8 +38,9 @@ function UserInfo() {
                     <SignOutButton />
                 </HStack>
                 <HStack>
-                <DisplaySelector />
-                <DeleteItems/>
+                    <DisplaySelector />
+                    <Sort />
+                    <DeleteItems />
                 </HStack>
                 <ItemCreator />
                 <TodoList />
