@@ -7,7 +7,7 @@ function Sort() {
     const tmp = todoList.concat();
     const sortList = tmp.sort((a, b) => Date.parse(a.term) - Date.parse(b.term));
     return (
-        <Button onClick={() => {setTodoList(sortList), console.log(tmp), console.log(sortList)}}>ソート</Button>
+        <Button onClick={() => {setTodoList(sortList)}}>ソート</Button>
     )
 }
 

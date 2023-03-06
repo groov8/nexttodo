@@ -3,7 +3,7 @@ import { todo } from '../store/atom';
 import { Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
 import type { Todo } from '../../../types/Todo';
 import TermSetter from './TermSetter';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import DeleteItem from './DeleteItem';
 
 type Props = {
@@ -27,16 +27,17 @@ const TodoItem = ({ item }: Props) => {
         setTodoList(newTodoList);
     };
 
-    const handleChange = (state: string) => {
-        setState(state);
-        changeItem();
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        setTodoList(prevState => prevState.map((obj, i) => {
+            return i === index ? {...obj, state: e.target.value} : obj
+        }))
     }
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <HStack>
             <Text as={"span"} mx={[0, 1]}>{title}</Text>
-            <select value={item.state} onChange={(e) => { handleChange(e.target.value)}}>
+            <select value={item.state} onChange={(e) => { handleChange}}>
                 <option value='not_started'>未着手</option>
                 <option value='start'>着手</option>
                 <option value='complete'>完了</option>
