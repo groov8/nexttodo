@@ -11,6 +11,7 @@ type Props = {
   setTitle?: (title: string | undefined) => void
   term: string
   setTerm: (term: string) => void
+  changeItem?: () => void
   isEdit: boolean
 }
 
@@ -40,8 +41,8 @@ function TermSetter(props: Props) {
               }}
             />
           </ModalBody>
-          {props.isEdit ? <Button onClick={() => { props.setTitle?.(title), props.setTerm(term), props.onClose() }}>変更</Button> :
-            <Button onClick={() => { props.onClose(), props.setTerm(term), setTerm("") }}>閉じる</Button>}
+          {props.isEdit ? <Button onClick={() => { props.setTitle?.(title), props.setTerm(term), props.changeItem?.(), props.onClose() }}>変更</Button> :
+            <Button onClick={() => { props.onClose(), props.setTerm(term) ,props.changeItem?.(), setTerm("") }}>閉じる</Button>}
         </ModalContent>
       </Modal>
     </>)
