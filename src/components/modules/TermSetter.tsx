@@ -3,21 +3,29 @@ import { Button, FormControl, FormLabel, HStack, Input, Modal, ModalBody, ModalC
 import interaction from "@fullcalendar/interaction";
 import daygrid from "@fullcalendar/daygrid";
 import { useState } from "react";
+import { todo } from "../store/atom";
+import { useRecoilState } from "recoil";
+import { title } from "process";
 
 type Props = {
+  index: number
   isOpen: boolean
   onClose: () => void
-  title?: string
-  setTitle?: (title: string | undefined) => void
-  term: string
-  setTerm: (term: string) => void
-  changeItem?: () => void
   isEdit: boolean
 }
 
 function TermSetter(props: Props) {
-  const [title, setTitle] = useState(props.title);
-  const [term, setTerm] = useState(props.term);
+  const [todoList, setTodoList] = useRecoilState(todo);
+  const item = todoList[props.index];
+  const setItem = () => {
+    const newTodoList = [
+      ...todoList.slice(0, props.index),
+      {...item, titel: item.title, term: item.term},
+      ...todoList.slice(props.index)
+    ]
+    setTodoList(newTodoList);
+  }
+
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={Boolean} size={"xl"}>
@@ -28,7 +36,7 @@ function TermSetter(props: Props) {
             {props.isEdit ?
               <>
                 <FormLabel > 変更後のタイトル</FormLabel>
-                <Input value={title} onChange={(e) => { setTitle(e.target.value) }} />
+                <Input value={item.title} onChange={(e) => { item.title = e.target.value }} />
               </> : <></>
             }
             <FullCalendar
@@ -37,12 +45,11 @@ function TermSetter(props: Props) {
               selectable={true}
               locale="ja"
               dateClick={function (info) {
-                setTerm(info.dateStr);
+                item.term = info.dateStr;
               }}
             />
           </ModalBody>
-          {props.isEdit ? <Button onClick={() => { props.setTitle?.(title), props.setTerm(term), props.changeItem?.(), props.onClose() }}>変更</Button> :
-            <Button onClick={() => { props.onClose(), props.setTerm(term) ,props.changeItem?.(), setTerm("") }}>閉じる</Button>}
+          {props.isEdit ? <Button onClick={setItem}>変更</Button>:<Button>閉じる</Button>}
         </ModalContent>
       </Modal>
     </>)

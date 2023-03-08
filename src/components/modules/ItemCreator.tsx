@@ -47,7 +47,7 @@ const ItemCreator = () => {
     <Box m={[0, "2%", "1%"]}>
       <Input h={8} w={52} border={"2px"} placeholder={"Title"} type="text" value={title} onChange={handleChange} />
       <Button onClick={onOpen}>期間を指定</Button>
-      <TermSetter isOpen={isOpen} onClose={onClose} setTerm={setTerm} isEdit={false} term={term} />
+      <TermSetter index={0} isOpen={isOpen} onClose={onClose} isEdit={false}/>
       <Button colorScheme="blue" onClick={addItem}>追加</Button>
     </Box>
   );
