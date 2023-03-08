@@ -1,4 +1,4 @@
-import { selector } from 'recoil';
+import { selector, useRecoilState } from 'recoil';
 import { todo, filter } from "./atom";
 
 export const stateFilteredTodo = selector({
@@ -10,3 +10,11 @@ export const stateFilteredTodo = selector({
         return list.filter((item) => item.state === state);
     }
 });
+
+export const a= selector({
+    key: "a",
+    get: ({get}) => {
+        const list = get(todo);
+        const [todoList, setTodoList] = useRecoilState(todo)
+    }
+})

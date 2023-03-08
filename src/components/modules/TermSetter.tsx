@@ -3,7 +3,7 @@ import { Button, FormControl, FormLabel, HStack, Input, Modal, ModalBody, ModalC
 import interaction from "@fullcalendar/interaction";
 import daygrid from "@fullcalendar/daygrid";
 import { useState } from "react";
-import { todo } from "../store/atom";
+import { todo } from "@/src/store/atom";
 import { useRecoilState } from "recoil";
 import { title } from "process";
 
@@ -36,7 +36,7 @@ function TermSetter(props: Props) {
             {props.isEdit ?
               <>
                 <FormLabel > 変更後のタイトル</FormLabel>
-                <Input value={item.title} onChange={(e) => { item.title = e.target.value }} />
+                <Input value={item.title} onChange={(e) => { e.target.value }} />
               </> : <></>
             }
             <FullCalendar
