@@ -1,4 +1,4 @@
-import { todo } from "../store/atom";
+import { todo } from "@/src/store/atom";
 import { useRecoilState } from "recoil";
 import { Button } from "@chakra-ui/react";
 

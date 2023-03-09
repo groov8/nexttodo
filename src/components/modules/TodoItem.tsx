@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { todo } from '../store/atom';
+import { todo } from '@/src/store/atom';
 import { Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
 import type { Todo } from '../../../types/Todo';
 import TermSetter from './TermSetter';

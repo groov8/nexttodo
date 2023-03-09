@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
-import { stateFilteredTodo } from '../store/selector';
 import TodoItem from './TodoItem';
 import type { Todo } from '../../../types/Todo';
+import { stateFilteredTodo } from '@/src/store/selector';
 
 const TodoList = () => {
   const todoList = useRecoilValue(stateFilteredTodo);

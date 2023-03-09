@@ -1,6 +1,6 @@
 import { Select } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
-import { filter } from '../store/atom';
+import { filter } from '@/src/store/atom';
 
 const DisplaySelector = () => {
   const [Filter, setFilter] = useRecoilState(filter);

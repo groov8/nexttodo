@@ -3,7 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { todo } from "../store/atom";
+import { todo } from "@/src/store/atom";
 import { Todo } from "../../../types/Todo";
 import { Img, Box, HStack } from "@chakra-ui/react";
 import ItemCreator from "./ItemCreator";
