@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { todo } from '@/src/store/atom';
 import { Input, Button, Box, useDisclosure } from '@chakra-ui/react';
@@ -14,8 +14,8 @@ const ItemCreator = () => {
   const colRef = collection(db, uid);
   const docRef = doc(colRef);
 
-  const handleChange = () => {
-    setTitle("");
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
   };
 
   const addItem = async () => {

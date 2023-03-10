@@ -6,6 +6,7 @@ import { useState } from "react";
 import { todo } from "@/src/store/atom";
 import { useRecoilState } from "recoil";
 import { title } from "process";
+import useChangeItem from "@/src/features/hooks/useChangeItem";
 
 type Props = {
   index: number
@@ -20,7 +21,7 @@ function TermSetter(props: Props) {
   const setItem = () => {
     const newTodoList = [
       ...todoList.slice(0, props.index),
-      {...item, titel: item.title, term: item.term},
+      { ...item, titel: item.title, term: item.term },
       ...todoList.slice(props.index)
     ]
     setTodoList(newTodoList);
@@ -29,7 +30,7 @@ function TermSetter(props: Props) {
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={Boolean} size={"xl"}>
-        <ModalOverlay/>
+        <ModalOverlay />
         <ModalContent>
           {props.isEdit ? <ModalHeader>編集</ModalHeader> : <ModalHeader>作成</ModalHeader>}
           <ModalBody>
@@ -45,11 +46,11 @@ function TermSetter(props: Props) {
               selectable={true}
               locale="ja"
               dateClick={function (info) {
-                item.term = info.dateStr;
+                useChangeItem({ index: props.index, key: "term", value: info.dateStr })
               }}
             />
           </ModalBody>
-          {props.isEdit ? <Button onClick={setItem}>変更</Button>:<Button>閉じる</Button>}
+          {props.isEdit ? <Button onClick={setItem}>変更</Button> : <Button>閉じる</Button>}
         </ModalContent>
       </Modal>
     </>)
